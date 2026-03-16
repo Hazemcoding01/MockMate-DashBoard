@@ -354,3 +354,24 @@ tr:hover td {
   color: #fed7aa;
   border: 1px solid rgba(245, 158, 11, 0.5);
 }
+/* --- Responsive Fix for Mobile --- */
+@media (max-width: 900px) {
+  /* بيخلي الجدول مريح ومش محشور */
+  .card {
+    overflow-x: auto;
+    padding: 10px;
+  }
+  
+  table {
+    min-width: 550px; /* ده السر اللي بيخلي الزراير واضحة */
+  }
+
+  /* بيصغر التوب بار شوية عشان مساحة الشاشة */
+  .topbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    height: auto;
+    padding: 10px;
+  }
+}
