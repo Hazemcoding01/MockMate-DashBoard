@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MockMate - Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+  <!-- Auth guard: لو مفيش توكن يرجع للوجين -->
+  <script>
+    (function () {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        window.location.href = 'login.html';
+      }
+    })();
+  </script>
+
+  <div class="layout">
+    <!-- Sidebar على الشمال -->
+    <aside class="sidebar">
+      <nav class="sidebar-nav">
+        <button class="nav-link active" data-section="tracks">Tracks</button>
+        <button class="nav-link" data-section="skills">Skills</button>
+        <button class="nav-link" data-section="questions">Questions</button>
+      </nav>
+    </aside>
+
+    <!-- Main area -->
+    <div class="main">
+      <header class="topbar">
+        <!-- الشمال: بيانات اليوزر -->
+        <div class="topbar-left">
+          <div class="user-pill">
+            <div class="user-avatar" id="userAvatar">U</div>
+            <span id="welcomeName"></span>
+          </div>
+        </div>
+
+        <!-- النص: العنوان MockMate فى النص أفقياً وعمودياً -->
+        <div class="topbar-center">
+          <div class="topbar-title">MockMate</div>
+        </div>
+
+        <!-- اليمين: زرار Logout بنفس استايل btn-primary -->
+        <div class="topbar-right">
+          <button id="logoutBtn" class="btn-primary">Logout</button>
+        </div>
+      </header>
+
+      <div class="content">
+        <!-- Tracks Section -->
+        <section id="tracksSection" class="section active">
+          <div class="section-header">
+            <h2>Tracks Management</h2>
+            <p>Manage tracks (job roles / paths) for interviews.</p>
+          </div>
+          <div class="grid-2">
+            <div class="card">
+              <h3 class="card-title">Tracks List</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Track Name</th>
+                    <th>Skills Count</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="tracksTableBody"></tbody>
+              </table>
+              <p id="tracksEmptyText" class="empty-text" style="display:none;">
+                No tracks added yet.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3 class="card-title">Add New Track</h3>
+              <form id="trackForm">
+                <div class="field">
+                  <label for="trackName">Track Name</label>
+                  <input type="text" id="trackName" placeholder="e.g. Frontend Developer" required />
+                </div>
+                <div class="field">
+                  <label for="trackDescription">Description</label>
+                  <textarea
+                    id="trackDescription"
+                    rows="4"
+                    placeholder="Short description about this track"
+                    required
+                  ></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Add Track</button>
+              </form>
+              <p id="trackMessage" class="message"></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skillsSection" class="section">
+          <div class="section-header">
+            <h2>Skills Management</h2>
+            <p>Manage skills related to each track.</p>
+          </div>
+          <div class="grid-2">
+            <!-- Skills table -->
+            <div class="card">
+              <h3 class="card-title">Skills List</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Skill Name</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="skillsTableBody"></tbody>
+              </table>
+              <p id="skillsEmptyText" class="empty-text" style="display:none;">
+                No skills added yet.
+              </p>
+            </div>
+
+            <!-- Add / Edit skill form -->
+            <div class="card">
+              <h3 class="card-title" id="skillFormTitle">Add New Skill</h3>
+              <form id="skillForm">
+                <div class="field">
+                  <label for="skillName">Skill Name</label>
+                  <input type="text" id="skillName" placeholder="e.g. JavaScript" required />
+                </div>
+                <div class="field">
+                  <label for="skillTrack">Track (optional)</label>
+                  <select id="skillTrack">
+                    <option value="">Select track</option>
+                  </select>
+                </div>
+                <div style="margin-top:10px;">
+                  <button type="submit" class="btn-primary" style="margin-right:8px;">Save Skill</button>
+                  <button type="button" id="cancelSkillEdit" class="btn-small">Cancel</button>
+                </div>
+              </form>
+              <p id="skillMessage" class="message"></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Questions Section -->
+        <section id="questionsSection" class="section">
+          <div class="section-header">
+            <h2>Questions Management</h2>
+            <p>Manage coding and MCQ questions for interviews.</p>
+          </div>
+
+          <!-- زرار Add Question -->
+          <div style="margin-bottom: 14px;">
+            <button id="addQuestionBtn" class="btn-primary">+ Add Question</button>
+          </div>
+
+          <!-- List view -->
+          <div id="questionsListSection">
+            <div class="grid-2">
+              <!-- Questions table -->
+              <div class="card">
+                <h3 class="card-title">Questions List</h3>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Title</th>
+                      <th>Type</th>
+                      <th>Seniority</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="questionsTableBody"></tbody>
+                </table>
+                <p id="questionsEmptyText" class="empty-text" style="display:none;">
+                  No questions added yet.
+                </p>
+              </div>
+
+              <!-- Question details -->
+              <div class="card">
+                <h3 class="card-title">Question Details</h3>
+                <div id="questionDetails">
+                  <p class="empty-text">Select a question from the list to view details.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Editor view -->
+          <div id="questionEditorSection" style="display:none; margin-top: 8px;">
+            <div class="card">
+              <h3 class="card-title" id="questionEditorTitle">Add Question</h3>
+              <form id="questionForm">
+                <div class="field">
+                  <label for="qTitle">Title</label>
+                  <input type="text" id="qTitle" placeholder="Question title" required />
+                </div>
+
+                <div class="field">
+                  <label for="qText">Question Text</label>
+                  <textarea id="qText" rows="3" placeholder="Full question text" required></textarea>
+                </div>
+
+                <div class="field">
+                  <label for="qType">Type</label>
+                  <select id="qType" required>
+                    <option value="">Select type</option>
+                    <option value="Coding">Coding</option>
+                    <option value="MCQ">MCQ</option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <label for="qSeniority">Seniority Level</label>
+                  <select id="qSeniority" required>
+                    <option value="">Select level</option>
+                    <option value="Junior">Junior</option>
+                    <option value="Mid">Mid</option>
+                    <option value="Mid-level">Mid-level</option>
+                    <option value="Senior">Senior</option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <label for="qTrack">Track</label>
+                  <select id="qTrack">
+                    <option value="">Select track</option>
+                  </select>
+                </div>
+
+                <!-- Skill dropdown -->
+                <div class="field">
+                  <label for="qSkillsSelect">Skill</label>
+                  <select id="qSkillsSelect">
+                    <option value="">Select skill</option>
+                  </select>
+                </div>
+
+                <!-- Coding specific -->
+                <div id="codingFields" style="margin-top:10px; display:none;">
+                  <h4 style="margin: 0 0 6px; font-size:14px; color:#e5e7eb;">Coding Settings</h4>
+                  <div class="field">
+                    <label for="qLanguage">Language (name only for UI)</label>
+                    <input type="text" id="qLanguage" placeholder="e.g. C#, JavaScript" />
+                  </div>
+                  <div class="field">
+                    <label for="qTimeLimit">Time Limit (ms)</label>
+                    <input type="number" id="qTimeLimit" placeholder="e.g. 1000" />
+                  </div>
+                  <div class="field">
+                    <label for="qMemoryLimit">Memory Limit (MB)</label>
+                    <input type="number" id="qMemoryLimit" placeholder="e.g. 256" />
+                  </div>
+                  <div class="field">
+                    <label for="qDefaultCode">Default Code</label>
+                    <textarea id="qDefaultCode" rows="3" placeholder="// starter code"></textarea>
+                  </div>
+                  <div class="field">
+                    <label for="qDriverCode">Driver Code</label>
+                    <textarea id="qDriverCode" rows="3" placeholder="// driver / test harness code"></textarea>
+                  </div>
+                  <div class="field">
+                    <label for="qTestInput">Test Input (sample)</label>
+                    <textarea id="qTestInput" rows="2" placeholder="e.g. 1 2"></textarea>
+                  </div>
+                  <div class="field">
+                    <label for="qTestExpected">Expected Output (sample)</label>
+                    <input type="text" id="qTestExpected" placeholder="e.g. 3" />
+                  </div>
+                </div>
+
+                <!-- MCQ specific -->
+                <div id="mcqFields" style="margin-top:10px; display:none;">
+                  <h4 style="margin: 0 0 6px; font-size:14px; color:#e5e7eb;">MCQ Options</h4>
+                  <div class="field">
+                    <label>Option 1</label>
+                    <input type="text" id="opt1" placeholder="First option" />
+                  </div>
+                  <div class="field">
+                    <label>Option 2</label>
+                    <input type="text" id="opt2" placeholder="Second option" />
+                  </div>
+                  <div class="field">
+                    <label>Option 3</label>
+                    <input type="text" id="opt3" placeholder="Third option" />
+                  </div>
+                  <div class="field">
+                    <label>Option 4</label>
+                    <input type="text" id="opt4" placeholder="Fourth option" />
+                  </div>
+                  <div class="field">
+                    <label for="qCorrectIndex">Correct Option</label>
+                    <select id="qCorrectIndex">
+                      <option value="">Select correct option</option>
+                      <option value="0">Option 1</option>
+                      <option value="1">Option 2</option>
+                      <option value="2">Option 3</option>
+                      <option value="3">Option 4</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div style="margin-top:10px;">
+                  <button type="submit" class="btn-primary" style="margin-right:8px;">Save</button>
+                  <button type="button" id="cancelQuestionEdit" class="btn-small">Cancel</button>
+                </div>
+              </form>
+              <p id="questionFormMessage" class="message"></p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

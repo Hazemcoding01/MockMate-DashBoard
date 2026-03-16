@@ -1,0 +1,356 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top left, #1f2937, transparent 55%),
+    radial-gradient(circle at bottom right, #111827, #020617 70%);
+  min-height: 100vh;
+  color: #e5e7eb;
+  direction: ltr;
+}
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: row;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 230px;
+  background: rgba(15, 23, 42, 0.95);
+  border-right: 1px solid rgba(31, 41, 55, 0.9);
+  color: #e5e7eb;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 6px 0 20px rgba(15, 23, 42, 0.8);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nav-link {
+  border: none;
+  background: transparent;
+  color: #cbd5f5;
+  text-align: left;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.1s ease, color 0.1s ease;
+}
+
+.nav-link:hover {
+  background: rgba(148, 163, 184, 0.2);
+}
+
+.nav-link.active {
+  background: linear-gradient(135deg, #38bdf8, #6366f1);
+  color: #f9fafb;
+  font-weight: 600;
+}
+
+/* Main area */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Topbar */
+.topbar {
+  background: rgba(15, 23, 42, 0.95);
+  border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;       /* يسنتر العناصر عمودياً */
+  justify-content: space-between;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.8);
+}
+
+.topbar-left,
+.topbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.topbar-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;   /* يسنتر العنوان أفقياً */
+  align-items: center;       /* يسنتر العنوان عمودياً */
+}
+
+/* عنوان MockMate – أكبر وواضح من غير إشعاع */
+.topbar-title {
+  font-size: 36px;                 /* كبرناها جامد شوية */
+  font-weight: 900;
+  letter-spacing: -0.08em;
+  background: linear-gradient(135deg, #60a5fa, #a855f7);
+  -webkit-background-clip: text;
+  color: transparent;
+  text-align: center;
+}
+
+/* User pill */
+.user-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  color: #e5e7eb;
+  font-size: 13px;
+}
+
+.user-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #38bdf8;
+  color: #0f172a;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.content {
+  padding: 20px;
+}
+
+.section {
+  display: none;
+}
+
+.section.active {
+  display: block;
+}
+
+.section-header {
+  margin-bottom: 16px;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #f9fafb;
+}
+
+.section-header p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr;
+  gap: 16px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.8);
+    border-right: none;
+    border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+  }
+
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .topbar-center {
+    order: -1;
+    justify-content: center;
+  }
+
+  .topbar-left,
+  .topbar-right {
+    justify-content: space-between;
+  }
+}
+
+/* Cards, tables, buttons, etc. */
+.card {
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 10px;
+  padding: 16px 18px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(31, 41, 55, 0.9);
+}
+
+.card-title {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  color: #e5e7eb;
+}
+
+th, td {
+  padding: 8px 6px;
+  border-bottom: 1px solid rgba(55, 65, 81, 0.9);
+  text-align: left;
+}
+
+th {
+  background: rgba(17, 24, 39, 0.9);
+  color: #9ca3af;
+  font-weight: 600;
+}
+
+tr:hover td {
+  background: rgba(31, 41, 55, 0.9);
+}
+
+.empty-text {
+  font-size: 13px;
+  color: #6b7280;
+  padding: 8px 0;
+}
+
+.field {
+  margin-bottom: 10px;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 3px;
+  font-size: 13px;
+  color: #e5e7eb;
+}
+
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  padding: 7px 8px;
+  border-radius: 6px;
+  border: 1px solid #4b5563;
+  font-size: 13px;
+  resize: vertical;
+  background: rgba(15, 23, 42, 0.95);
+  color: #e5e7eb;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: #6b7280;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.35);
+}
+
+/* الزرار الأساسي (Add Question, Save, Logout) */
+.btn-primary {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  background: linear-gradient(135deg, #38bdf8, #6366f1);
+  color: #f9fafb;
+  font-size: 13px;
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.1s ease, opacity 0.1s ease;
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.5);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(59, 130, 246, 0.7);
+  opacity: 0.98;
+}
+
+.btn-small {
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: none;
+  background: #4b5563;
+  color: #f9fafb;
+  font-size: 11px;
+  cursor: pointer;
+  margin-right: 4px;
+  transition: background 0.1s ease;
+}
+
+.btn-small:hover {
+  background: #6b7280;
+}
+
+.message {
+  font-size: 13px;
+  margin-top: 6px;
+  min-height: 16px;
+}
+
+.message.error {
+  color: #fca5a5;
+}
+
+.message.success {
+  color: #bbf7d0;
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 999px;
+  font-size: 11px;
+  background: rgba(37, 99, 235, 0.15);
+  color: #93c5fd;
+  border: 1px solid rgba(59, 130, 246, 0.6);
+}
+
+.badge-secondary {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fed7aa;
+  border: 1px solid rgba(245, 158, 11, 0.5);
+}

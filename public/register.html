@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MockMate - Create Admin Account</title>
+  <!-- ربط ملف الستايل -->
+  <link rel="stylesheet" href="register.css" />
+</head>
+<body>
+  <div class="page">
+    <!-- Logo فقط فوق الفورم -->
+    <h1 class="branding-title">MockMate</h1>
+
+    <!-- كارد الفورم -->
+    <div class="card">
+      <h1>Create Admin Account</h1>
+      <p class="subtitle">Fill in the details below to set up an admin for your company.</p>
+
+      <form id="registerForm">
+        <div class="field">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="e.g. company_admin" required />
+        </div>
+
+        <div class="field">
+          <label for="displayName">Display Name</label>
+          <input type="text" id="displayName" placeholder="e.g. John Smith" required />
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="admin@company.com" required />
+        </div>
+
+        <div class="field">
+          <label for="phoneNumber">Phone Number</label>
+          <input
+            type="tel"
+            id="phoneNumber"
+            placeholder="+20 1011111111"
+            required
+          />
+        </div>
+
+        <!-- شيلنا اختيار الـ Role من الـ UI، هيتبعت Admin من الجافاسكربت -->
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="••••••••" required />
+        </div>
+
+        <div class="field">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" placeholder="••••••••" required />
+        </div>
+
+        <button type="submit">Create Account</button>
+      </form>
+
+      <p id="message" class="message"></p>
+
+      <p class="footer-link">
+        Already have an account? <a href="login.html">Login</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ربط ملف الجافاسكريبت -->
+  <script src="register.js"></script>
+</body>
+</html>

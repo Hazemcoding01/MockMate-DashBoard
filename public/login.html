@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MockMate - Login</title>
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+  <script>
+    (function () {
+      const token = localStorage.getItem('token');
+      if (token) {
+        window.location.href = 'dashboard.html';
+      }
+    })();
+  </script>
+
+  <div class="page">
+    
+    <div class="card">
+      <h1>Login</h1>
+      <p class="subtitle">Sign in as a company admin to access your dashboard.</p>
+
+      <form id="loginForm">
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="you@example.com" required />
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="••••••••" required />
+        </div>
+
+        <button type="submit">Login</button>
+      </form>
+
+      <p id="message" class="message"></p>
+
+      <p class="footer-link">
+        Don't have an account? <a href="register.html">Create one</a>
+      </p>
+    </div>
+
+    <div class="branding">
+      <h1 class="branding-title">MockMate</h1>
+      <p class="branding-sub">
+        Admin portal for configuring your AI interview experience.
+      </p>
+      <p class="branding-text">
+        As a company admin, you can define tracks, assign required skills, and manage coding &amp; MCQ
+        questions so every candidate gets a consistent and fair interview.
+        Keep your interview library organized, up to date, and ready for your hiring team.
+      </p>
+    </div>
+  </div>
+  <script src="login.js"></script>
+</body>
+</html>
