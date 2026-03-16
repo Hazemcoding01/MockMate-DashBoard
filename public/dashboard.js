@@ -1,4 +1,4 @@
-// ================== Auth info ==================
+
 const userName = localStorage.getItem('userName') || 'User';
 const welcomeEl = document.getElementById('welcomeName');
 const avatarEl = document.getElementById('userAvatar');
@@ -21,7 +21,7 @@ if (logoutBtn) {
   });
 }
 
-// ================== Sidebar navigation ==================
+
 const navLinks = document.querySelectorAll('.nav-link');
 const sections = {
   tracks: document.getElementById('tracksSection'),
@@ -45,10 +45,10 @@ const skillTrackSelect = document.getElementById('skillTrack');
 const qTrack = document.getElementById('qTrack');
 const qSkillsSelect = document.getElementById('qSkillsSelect');
 
-// مصفوفة skills العامة (نستخدمها فى دروب ليست السؤال)
+
 let allSkills = [];
 
-// ================== Tracks (API) ==================
+
 let tracks = [];
 let editingTrackId = null;
 
@@ -57,7 +57,7 @@ const tracksEmptyText = document.getElementById('tracksEmptyText');
 const trackForm = document.getElementById('trackForm');
 const trackMessage = document.getElementById('trackMessage');
 
-// تحميل Tracks من الـ API
+
 async function loadTracks() {
   const token = localStorage.getItem('token');
   tracksTableBody.innerHTML = '';
@@ -129,7 +129,7 @@ function renderTracks() {
   refreshTrackOptions();
 }
 
-// كليك على أزرار Edit / Delete فى جدول التراكس
+
 tracksTableBody.addEventListener('click', async (e) => {
   const target = e.target;
 
@@ -165,7 +165,7 @@ tracksTableBody.addEventListener('click', async (e) => {
       }
 
       await loadTracks();
-      await loadSkills(); // عشان Skills Count تتظبط
+      await loadSkills(); 
     } catch (err) {
       console.error('Delete track fetch error:', err);
       alert('Connection error while deleting track.');
@@ -173,7 +173,7 @@ tracksTableBody.addEventListener('click', async (e) => {
   }
 });
 
-// بدء تعديل Track (يملى الفورم)
+
 function startEditTrack(id) {
   const track = tracks.find((t) => t.id === id);
   if (!track) return;
@@ -186,7 +186,7 @@ function startEditTrack(id) {
   document.getElementById('trackDescription').value = track.description || '';
 }
 
-// إضافة / تعديل Track
+
 trackForm.addEventListener('submit', async function (e) {
   e.preventDefault();
   trackMessage.textContent = '';
@@ -252,7 +252,7 @@ trackForm.addEventListener('submit', async function (e) {
   }
 });
 
-// ================== Skills (API) ==================
+
 let skills = [];
 let editingSkillId = null;
 
@@ -264,7 +264,7 @@ const skillFormTitle = document.getElementById('skillFormTitle');
 const cancelSkillEditBtn = document.getElementById('cancelSkillEdit');
 const skillNameInput = document.getElementById('skillName');
 
-// تحميل Skills من الـ API (للتابل + دروب ليست السؤال)
+
 async function loadSkills() {
   const token = localStorage.getItem('token');
   skillsTableBody.innerHTML = '';
@@ -332,7 +332,7 @@ function renderSkills() {
   });
 }
 
-// edit / delete فى جدول الـ Skills
+
 skillsTableBody.addEventListener('click', async (e) => {
   const target = e.target;
 
@@ -458,7 +458,7 @@ skillForm.addEventListener('submit', async function (e) {
   }
 }
 );
-// ================== Questions (from API) ==================
+
 let questions = [];
 let selectedQuestionId = null;
 let editingQuestionId = null;
@@ -493,7 +493,7 @@ const opt3 = document.getElementById('opt3');
 const opt4 = document.getElementById('opt4');
 const qCorrectIndex = document.getElementById('qCorrectIndex');
 
-// نملأ دروب ليست Skill فى فورم السؤال من allSkills
+
 function fillSkillsDropdown() {
   if (!qSkillsSelect) return;
   qSkillsSelect.innerHTML = '<option value="">Select skill</option>';
@@ -507,7 +507,7 @@ function fillSkillsDropdown() {
   });
 }
 
-// تحميل الأسئلة من الـ API
+
 async function loadQuestions() {
   const token = localStorage.getItem('token');
   questionsTableBody.innerHTML = '';
@@ -548,7 +548,7 @@ async function loadQuestions() {
   }
 }
 
-// تحويل السؤال من شكل الـ API لشكل الواجهة
+
 function mapQuestionFromApi(apiQ) {
   const rawType =
     apiQ.questionType || apiQ.type || (apiQ.options ? 'MCQ' : 'Coding') || '';
@@ -573,7 +573,7 @@ function mapQuestionFromApi(apiQ) {
   };
 }
 
-// Render الأسئلة
+
 function renderQuestions() {
   questionsTableBody.innerHTML = '';
 
@@ -606,7 +606,7 @@ function renderQuestions() {
   renderQuestionDetails();
 }
 
-// ======== Question Details (Title/Type/Seniority/CreatedAt فقط) ========
+
 function renderQuestionDetails() {
   questionDetailsEl.innerHTML = '';
 
@@ -635,7 +635,7 @@ function renderQuestionDetails() {
   `;
 }
 
-// ------- List / Editor toggle -------
+
 function showQuestionsList() {
   questionsListSection.style.display = '';
   questionEditorSection.style.display = 'none';
@@ -674,7 +674,7 @@ cancelQuestionEditBtn.addEventListener('click', () => {
   showQuestionsList();
 });
 
-// ------- Type change toggle -------
+
 qType.addEventListener('change', () => {
   const val = qType.value;
   if (val === 'Coding') {
@@ -689,7 +689,7 @@ qType.addEventListener('change', () => {
   }
 });
 
-// ------- Table click (select row / edit / delete) -------
+
 questionsTableBody.addEventListener('click', async (e) => {
   const target = e.target;
 
@@ -746,7 +746,7 @@ questionsTableBody.addEventListener('click', async (e) => {
   }
 });
 
-// ------- Start edit question -------
+
 function startEditQuestion(id) {
   const q = questions.find((x) => x.id === id);
   if (!q) return;
@@ -797,7 +797,7 @@ function startEditQuestion(id) {
   showQuestionEditor(true);
 }
 
-// ------- Save question (add/edit) -> API -------
+
 questionForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   questionFormMessage.textContent = '';
@@ -807,7 +807,7 @@ questionForm.addEventListener('submit', async (e) => {
   const text = qText.value.trim();
   const type = qType.value;
   const seniority = qSeniority.value;
-  const trackName = qTrack.value; // مش رايح للـ API دلوقتى
+  const trackName = qTrack.value; 
 
   if (!title || !text || !type || !seniority) {
     questionFormMessage.textContent = 'Please fill required fields.';
@@ -929,7 +929,7 @@ questionForm.addEventListener('submit', async (e) => {
   }
 });
 
-// ======== helper: refresh selects of tracks ========
+
 function refreshTrackOptions() {
   skillTrackSelect.innerHTML = '<option value="">Select track</option>';
   qTrack.innerHTML = '<option value="">Select track</option>';
@@ -947,7 +947,7 @@ function refreshTrackOptions() {
   });
 }
 
-// ================== initial renders ==================
+
 loadTracks();
 loadSkills();
 loadQuestions();

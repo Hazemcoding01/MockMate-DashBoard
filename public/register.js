@@ -37,12 +37,12 @@ form.addEventListener('submit', async function (e) {
     return;
   }
 
-  // نثبت الـ role على "Admin" فقط
+
   const payload = {
     username: username,
     email: email,
     phoneNumber: phoneNumber,
-    passWord: password,   // مطابق لاسم الحقل في Swagger
+    passWord: password,   
     displayName: displayName,
     role: 'Admin'
   };
@@ -80,10 +80,10 @@ form.addEventListener('submit', async function (e) {
       return;
     }
 
-    // نخزن الـ displayName في localStorage عشان نستخدمه بعد كده
+    
     localStorage.setItem('userName', displayName);
 
-    messageEl.textContent = 'تم إنشاء حساب الأدمن بنجاح! هتتحول لصفحة تسجيل الدخول بعد لحظات.';
+    messageEl.textContent = 'تم انشاء الحساب بنجاح';
     messageEl.classList.add('success');
 
     setTimeout(() => {

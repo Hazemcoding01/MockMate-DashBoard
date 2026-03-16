@@ -35,13 +35,13 @@ form.addEventListener('submit', async function (e) {
       return;
     }
 
-    // token من الـ response
+    
     const token = data.token || data.accessToken || 'dummy-token';
 
-    // الافتراض الأول: لو كنا مخزنين userName (displayName) من قبل نستخدمه
+    
     let userName = localStorage.getItem('userName') || email;
 
-    // لو الـ API رجّع displayName أو اسم جوّه user نستخدمه بدل القديم
+    
     if (data.displayName) {
       userName = data.displayName;
     } else if (data.user) {
@@ -56,7 +56,7 @@ form.addEventListener('submit', async function (e) {
       userName = data.userName;
     }
 
-    // نخزن التوكن واسم اليوزر (يفضل يكون displayName)
+    
     localStorage.setItem('token', token);
     localStorage.setItem('userName', userName);
 

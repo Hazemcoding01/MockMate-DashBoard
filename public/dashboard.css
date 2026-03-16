@@ -19,7 +19,7 @@ body {
   flex-direction: row;
 }
 
-/* Sidebar */
+
 .sidebar {
   width: 230px;
   background: rgba(15, 23, 42, 0.95);
@@ -62,7 +62,7 @@ body {
   font-weight: 600;
 }
 
-/* Main area */
+
 .main {
   flex: 1;
   display: flex;
@@ -70,13 +70,13 @@ body {
   min-width: 0;
 }
 
-/* Topbar */
+
 .topbar {
   background: rgba(15, 23, 42, 0.95);
   border-bottom: 1px solid rgba(31, 41, 55, 0.9);
   padding: 10px 20px;
   display: flex;
-  align-items: center;       /* يسنتر العناصر عمودياً */
+  align-items: center;       
   justify-content: space-between;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -92,13 +92,13 @@ body {
 .topbar-center {
   flex: 1;
   display: flex;
-  justify-content: center;   /* يسنتر العنوان أفقياً */
-  align-items: center;       /* يسنتر العنوان عمودياً */
+  justify-content: center;   
+  align-items: center;       
 }
 
-/* عنوان MockMate – أكبر وواضح من غير إشعاع */
+
 .topbar-title {
-  font-size: 36px;                 /* كبرناها جامد شوية */
+  font-size: 36px;                 
   font-weight: 900;
   letter-spacing: -0.08em;
   background: linear-gradient(135deg, #60a5fa, #a855f7);
@@ -107,7 +107,7 @@ body {
   text-align: center;
 }
 
-/* User pill */
+
 .user-pill {
   display: inline-flex;
   align-items: center;
@@ -208,7 +208,7 @@ body {
   }
 }
 
-/* Cards, tables, buttons, etc. */
+
 .card {
   background: rgba(15, 23, 42, 0.9);
   border-radius: 10px;
@@ -290,7 +290,7 @@ tr:hover td {
   box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.35);
 }
 
-/* الزرار الأساسي (Add Question, Save, Logout) */
+
 .btn-primary {
   padding: 8px 12px;
   border-radius: 6px;
@@ -354,19 +354,19 @@ tr:hover td {
   color: #fed7aa;
   border: 1px solid rgba(245, 158, 11, 0.5);
 }
-/* --- Responsive Fix for Mobile --- */
+
 @media (max-width: 900px) {
-  /* بيخلي الجدول مريح ومش محشور */
+  
   .card {
     overflow-x: auto;
     padding: 10px;
   }
   
   table {
-    min-width: 550px; /* ده السر اللي بيخلي الزراير واضحة */
+    min-width: 550px; 
   }
 
-  /* بيصغر التوب بار شوية عشان مساحة الشاشة */
+  
   .topbar {
     flex-wrap: wrap;
     justify-content: center;
