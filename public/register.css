@@ -154,3 +154,34 @@
     .footer-link a:hover {
       text-decoration: underline;
     }
+@media (max-width: 576px) {
+  .page {
+    padding: 16px;
+    gap: 14px;
+  }
+
+  .branding-title {
+    font-size: 34px;
+  }
+
+  .card {
+    padding: 18px 16px;
+  }
+
+  .card h1 {
+    font-size: 18px;
+  }
+
+  .card p.subtitle,
+  label,
+  .message,
+  .footer-link {
+    font-size: 12px;
+  }
+
+  input,
+  select,
+  button {
+    font-size: 14px;
+  }
+}

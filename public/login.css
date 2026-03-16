@@ -198,4 +198,63 @@
         width: 100%;
       }
     }
-  
+  @media (max-width: 900px) {
+  .page {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 24px;
+    max-width: 460px;
+  }
+
+  .branding {
+    text-align: center;
+  }
+
+  .branding-title {
+    font-size: 44px;
+    margin-bottom: 8px;
+  }
+
+  .branding-text {
+    margin: 0 auto;
+    max-width: 100%;
+  }
+
+  .card {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .page {
+    padding: 16px;
+    gap: 18px;
+    max-width: 100%;
+  }
+
+  .card {
+    padding: 18px 16px;
+  }
+
+  .branding-title {
+    font-size: 32px;
+  }
+
+  .branding-sub {
+    font-size: 14px;
+  }
+
+  .branding-text {
+    font-size: 12px;
+  }
+
+  .card h1 {
+    font-size: 20px;
+  }
+
+  input,
+  button {
+    font-size: 14px;
+  }
+}
