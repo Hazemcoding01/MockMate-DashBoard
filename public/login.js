@@ -16,7 +16,7 @@ form.addEventListener('submit', async function (e) {
   }
 
   try {
-    const response = await fetch('/api/users/login', {
+    fetch('http://mockmate-001-site1.mtempurl.com/api/users/login',  {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
