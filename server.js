@@ -5,7 +5,7 @@ const path = require('path');
 
 const app = express();
 
-const API_BASE_URL = 'http://ahmedsalah1-001-site1.ktempurl.com';
+const API_BASE_URL = 'http://mockmate-001-site1.mtempurl.com';
 
 app.use(cors());
 app.use(express.json());
