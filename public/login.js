@@ -16,7 +16,8 @@ form.addEventListener('submit', async function (e) {
   }
 
   try {
-    fetch('http://mockmate-001-site1.mtempurl.com/api/users/login',  {
+  
+    const response = await fetch('/api/users/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
@@ -35,28 +36,20 @@ form.addEventListener('submit', async function (e) {
       return;
     }
 
-    
     const token = data.token || data.accessToken || 'dummy-token';
 
-    
     let userName = localStorage.getItem('userName') || email;
 
-    
     if (data.displayName) {
       userName = data.displayName;
     } else if (data.user) {
-      if (data.user.displayName) {
-        userName = data.user.displayName;
-      } else if (data.user.name) {
-        userName = data.user.name;
-      } else if (data.user.userName) {
-        userName = data.user.userName;
-      }
+      if (data.user.displayName) userName = data.user.displayName;
+      else if (data.user.name) userName = data.user.name;
+      else if (data.user.userName) userName = data.user.userName;
     } else if (data.userName) {
       userName = data.userName;
     }
 
-    
     localStorage.setItem('token', token);
     localStorage.setItem('userName', userName);
 
@@ -68,7 +61,7 @@ form.addEventListener('submit', async function (e) {
     }, 1000);
   } catch (err) {
     console.error('login fetch error:', err);
-    messageEl.textContent = 'حصلت مشكلة في الاتصال بالسيرفر المحلي';
+    messageEl.textContent = 'حصلت مشكلة في الاتصال بالسيرفر';
     messageEl.classList.add('error');
   }
 });
